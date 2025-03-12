@@ -113,7 +113,25 @@
 }
 
 .sideNav {
-    position: relative;
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%); /* Centers vertically */
+    display: flex;
     flex-direction: column;
-    margin-right: auto;
+    align-items: center; /* Centers icons horizontally */
+    gap: 16px; /* Space between icons */
+    padding: 8px;
+}
+
+.iconStyle {
+    width: 32px;
+    height: 32px;
+    color: white;
+}
+
+.iconStyle:hover {
+    width: 32px;
+    height: 32px;
+    color: blue;
 }
