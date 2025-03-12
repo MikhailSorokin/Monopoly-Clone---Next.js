@@ -141,6 +141,13 @@
     border-radius: 8px; /* Rounded edges */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
     overflow: hidden; /* Ensures nothing spills out */
+    transition: transform 1s ease;
+    transform: scale(0);
+    transform-origin: center center;
+}
+
+.cardContainer.visible {
+    transform: scale(1);
 }
 
 .cardHeader {

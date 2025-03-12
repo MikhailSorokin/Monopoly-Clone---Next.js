@@ -1,7 +1,33 @@
 import gameStyles from "../styles/game.module.css"
 import Image from "next/image"
+import React, {useEffect, useState, useRef} from "react";
 
 export default function InfoPanel({ selectedCard }) {
+
+    const audioRef = useRef(null);
+    const [volume, setVolume] = useState(0.05);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        if (audioRef.current) {
+            audioRef.current.volume = volume;
+            audioRef.current.muted = false;
+        } else {
+            const audio = document.getElementById("bg-audio")
+            audio.play().catch(error => console.log("Playback error: ", error));
+        }
+
+        // Trigger the scaling effect when selectedCard changes
+        if (selectedCard) {
+            setIsVisible(true);
+        } else {
+            setIsVisible(false);
+        }
+    }, [volume, selectedCard]);
+
+    const handleVolumeChange = (e) => {
+        setVolume(parseFloat(e.target.value));
+    };
 
     return (
         <div className={gameStyles.infoPanel}>
@@ -10,7 +36,8 @@ export default function InfoPanel({ selectedCard }) {
 
             {
                 selectedCard ?
-                (<div className={gameStyles.cardContainer}>
+                (  <div
+                    className={`${gameStyles.cardContainer} ${isVisible ? gameStyles.visible : ''}`}>
                     <div className={gameStyles.cardHeader} style={ { backgroundColor: selectedCard.hexColor } }>
                         <p className={gameStyles.infoPanelTitle} >{selectedCard.name}</p>
                     </div>
@@ -32,11 +59,30 @@ export default function InfoPanel({ selectedCard }) {
                         </ul>
                     </div>
 
-                    <Image src="/PropertyBase.png" width={157} height={244} style={ {transform: "scale(1)"} }></Image>
+                    <Image src="/PropertyBase.png" width={157} height={244} ></Image>
                 </div>)
                 :
                 (<p className={gameStyles.infoText} style={{color:"gray", fontSize: "20px"}}>No cards have been selected.</p> )
             }
+
+            <p className={gameStyles.infoText}>Audio Sliders</p>
+            <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={volume}
+                onChange={handleVolumeChange}
+            />
+
+
+            <audio audio ref={audioRef} autoPlay loop muted defaultValue={volume}>
+                <source src="/exhibitA.mp3" type="audio/mpeg" />  
+            </audio>  
+            
+            <audio id = "card-audio">
+                <source src="/flipcard.mp3" type="audio/mpeg" />  
+            </audio>  
         </div>
     )
 }

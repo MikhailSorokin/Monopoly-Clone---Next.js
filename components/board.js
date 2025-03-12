@@ -127,7 +127,13 @@ export default function Board( { selectedCard, onCardClick }) {
         <div className={boardStyle.board}>
             { cards.map((card, index) => (
                 <Card index={index} price={card.price} name={card.name} x={card.x} y={card.y} isSelected={selectedCard && selectedCard.name === card.name } 
-                onSelect={() => onCardClick (card)}
+                onSelect={() => 
+                    {
+                        onCardClick (card)
+                        const audio = document.getElementById("card-audio")
+                        audio.play().catch(error => console.log("Playback error: ", error));      
+                    }
+                }
                 imageSource={card.source}
                 angle={card.angle} />
             ))}
@@ -140,6 +146,7 @@ export default function Board( { selectedCard, onCardClick }) {
                     <Player x={x} y={y}/>
                 </div>
             </div>
+
         </div>
     )
 }

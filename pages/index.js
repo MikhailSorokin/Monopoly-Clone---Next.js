@@ -8,16 +8,6 @@ import InfoPanel from "../components/infopanel.js";
 
 export default function RootLayout({ }) {
 
-    useEffect(() => {
-        const enableAudio = () => {
-            const audio = document.getElementById("bg-audio")
-            audio.play().catch(error => console.log("Playback error: ", error));
-            document.removeEventListener("click", enableAudio);
-        };
-        document.addEventListener("click", enableAudio);
-        return () => document.removeEventListener("click", enableAudio);
-    }, []);
-
     const [selectedCard, setSelectedCard] = useState(null);
 
     return (
@@ -31,9 +21,6 @@ export default function RootLayout({ }) {
                 </section>
             </div>
 
-            <audio id = "bg-audio" autoPlay loop>
-                <source src="/exhibitA.mp3" type="audio/mpeg" />  
-            </audio>  
         </Game>
         
     )
