@@ -207,5 +207,5 @@
     height: 100%;
     pointer-events: none; /* Prevents interfering with clicks on the board */
     transition: transform 0.5s ease-in-out; /* Smooth movement */
-    z-index: 200;
+    z-index: 90;
 }

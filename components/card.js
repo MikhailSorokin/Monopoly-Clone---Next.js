@@ -10,7 +10,7 @@ export default function Card({ index, name, price, x, y, isSelected, onSelect, i
             onClick={onSelect}
         >
              <div className={gameStyles.imageContainer}>
-                <Image src={imageSource} width={116*0.58} height={186*0.58}></Image>
+                <Image src={imageSource} alt="clickable board card" width={116*0.58} height={186*0.58}></Image>
                 <p className={gameStyles.cardTitle}>{name}</p>
                 <p className={price < 100 ? gameStyles.moneyFooterOneDigit : gameStyles.moneyFooterTwoDigits}>{price}</p>
             </div>

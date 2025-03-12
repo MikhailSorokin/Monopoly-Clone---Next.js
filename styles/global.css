@@ -1,4 +1,9 @@
+html {
+    overflow: hidden;
+}
+
 body {
     background-color: #232323;
     background-color: rgb(205, 230, 208);
+    overflow: hidden;
 }

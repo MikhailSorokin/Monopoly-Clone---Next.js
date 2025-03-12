@@ -5,17 +5,21 @@ import React, {useEffect, useState, useRef} from "react";
 export default function InfoPanel({ selectedCard }) {
 
     const audioRef = useRef(null);
-    const [volume, setVolume] = useState(0.05);
+    const [volume, setVolume] = useState(0.1);
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        if (audioRef.current) {
-            audioRef.current.volume = volume;
-            audioRef.current.muted = false;
-        } else {
-            const audio = document.getElementById("bg-audio")
-            audio.play().catch(error => console.log("Playback error: ", error));
-        }
+        const handleUserInteraction = () => {
+            if (audioRef.current) {
+                audioRef.current.volume = volume;
+                audioRef.current.muted = false
+                audioRef.current.play().catch(error => console.log("Playback error: ", error));
+            }
+            document.removeEventListener("click", handleUserInteraction)    
+        };
+
+        document.addEventListener("click", handleUserInteraction)
+
 
         // Trigger the scaling effect when selectedCard changes
         if (selectedCard) {
@@ -24,10 +28,6 @@ export default function InfoPanel({ selectedCard }) {
             setIsVisible(false);
         }
     }, [volume, selectedCard]);
-
-    const handleVolumeChange = (e) => {
-        setVolume(parseFloat(e.target.value));
-    };
 
     return (
         <div className={gameStyles.infoPanel}>
@@ -59,24 +59,32 @@ export default function InfoPanel({ selectedCard }) {
                         </ul>
                     </div>
 
-                    <Image src="/PropertyBase.png" width={157} height={244} ></Image>
+                    <Image src="/PropertyBase.png" alt="property card image" width={157} height={244} ></Image>
                 </div>)
                 :
                 (<p className={gameStyles.infoText} style={{color:"gray", fontSize: "20px"}}>No cards have been selected.</p> )
             }
 
-            <p className={gameStyles.infoText}>Audio Sliders</p>
-            <input
-                type="range"
-                min="0"
-                max="1"
-                step="0.01"
-                value={volume}
-                onChange={handleVolumeChange}
-            />
+            <div className="sliders" style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <p className={gameStyles.infoText}>Audio Sliders</p>
+
+                <div className="vertical-box" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                    <p className={gameStyles.infoText} style={{ fontSize: "15px", textAlign: "center" }}>
+                        Music Slider
+                    </p>
+                    <input
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.01"
+                        value={volume}
+                        onChange={(e) => setVolume(parseFloat(e.target.value))}
+                    />
+                </div>
+            </div>
 
 
-            <audio audio ref={audioRef} autoPlay loop muted defaultValue={volume}>
+            <audio ref={audioRef} muted loop>
                 <source src="/exhibitA.mp3" type="audio/mpeg" />  
             </audio>  
             

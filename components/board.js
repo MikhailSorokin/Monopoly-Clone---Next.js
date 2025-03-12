@@ -95,7 +95,7 @@ export default function Board( { selectedCard, onCardClick }) {
             const deltaTime = currentTime - lastTimeRef.current;
             lastTimeRef.current = currentTime;
 
-            console.log(`x: ${x}, y: ${y}`);
+            //console.log(`x: ${x}, y: ${y}`);
             const speed = 0.2;
 
             if (y >= -760 && signY === -1) {
@@ -140,7 +140,7 @@ export default function Board( { selectedCard, onCardClick }) {
 
  
             <div className={boardStyle.board}>
-                <Image className={boardStyle.rotated} priority src="/Board.jpg" width={850} height={850}></Image>
+                <Image className={boardStyle.rotated} alt = "board" priority src="/Board.jpg" width={850} height={850}></Image>
 
                 <div className={boardStyle.playerOverlay}>
                     <Player x={x} y={y}/>
