@@ -1,11 +1,11 @@
-import gameStyles from "../styles/game.module.css"
+import panelStyles from "../styles/panel.module.css"
 import Image from "next/image"
 import React, {useEffect, useState, useRef} from "react";
 
 export default function InfoPanel({ selectedCard }) {
 
     const audioRef = useRef(null);
-    const [volume, setVolume] = useState(0.1);
+    const [volume, setVolume] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -30,46 +30,65 @@ export default function InfoPanel({ selectedCard }) {
     }, [volume, selectedCard]);
 
     return (
-        <div className={gameStyles.infoPanel}>
+        <div className={panelStyles.infoPanel}>
 
-            <p className={gameStyles.infoText}>Information</p>
+
+            <section className={panelStyles.sideNav} style={ { zIndex: 500} }>
+
+                <svg style={ { color: "white"} }  class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" d="M8 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4H6Zm7.25-2.095c.478-.86.75-1.85.75-2.905a5.973 5.973 0 0 0-.75-2.906 4 4 0 1 1 0 5.811ZM15.466 20c.34-.588.535-1.271.535-2v-1a5.978 5.978 0 0 0-1.528-4H18a4 4 0 0 1 4 4v1a2 2 0 0 1-2 2h-4.535Z" clip-rule="evenodd"/>
+                </svg>
+
+
+                <svg style={ { color: "white"} }  class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" d="M4 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4Zm10 5a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm-8-5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm1.942 4a3 3 0 0 0-2.847 2.051l-.044.133-.004.012c-.042.126-.055.167-.042.195.006.013.02.023.038.039.032.025.08.064.146.155A1 1 0 0 0 6 17h6a1 1 0 0 0 .811-.415.713.713 0 0 1 .146-.155c.019-.016.031-.026.038-.04.014-.027 0-.068-.042-.194l-.004-.012-.044-.133A3 3 0 0 0 10.059 14H7.942Z" clip-rule="evenodd"/>
+                </svg>
+
+
+                <svg  style={ { color: "white"} } class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M20 6H10m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m0 0H4m16 6h-2m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m0 0H4m16 6H10m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m0 0H4"/>
+                </svg>
+
+            </section>
+
+            <p className={panelStyles.infoText}>Information</p>
 
             {
                 selectedCard ?
                 (  <div
-                    className={`${gameStyles.cardContainer} ${isVisible ? gameStyles.visible : ''}`}>
-                    <div className={gameStyles.cardHeader} style={ { backgroundColor: selectedCard.hexColor } }>
-                        <p className={gameStyles.infoPanelTitle} >{selectedCard.name}</p>
+                    className={`${panelStyles.cardContainer} ${isVisible ? panelStyles.visible : ''}`}>
+                    <div className={panelStyles.cardHeader} style={ { backgroundColor: selectedCard.hexColor } }>
+                        <p className={panelStyles.infoPanelTitle} >{selectedCard.name}</p>
                     </div>
 
-                    <div className={gameStyles.infoPanelBody}>
+                    <div className={panelStyles.infoPanelBody}>
                         <ul>
-                            <p className={gameStyles.infoPanelMoney} >{selectedCard.rent}</p>
-                            <p className={gameStyles.infoPanelMoney} style={ {paddingTop: "1px"}} >{selectedCard.rent * 2}</p>
-                            <p className={gameStyles.infoPanelMoney} style={ {paddingTop: "2px"}} >{selectedCard.rent * 2}</p>
-                            <p className={gameStyles.infoPanelMoney} style={ {paddingTop: "0px"}} >{selectedCard.rentHouse}</p>
-                            <p className={gameStyles.infoPanelMoney} style={ {paddingTop: "2px"}}>{selectedCard.rent2Houses}</p>
-                            <p className={gameStyles.infoPanelMoney} style={ {paddingTop: "1.5px"}}>{selectedCard.rent3Houses}</p>
-                            <p className={gameStyles.infoPanelMoney} style={ {paddingTop: "1px"}}>{selectedCard.rent4Houses}</p>
+                            <p className={panelStyles.infoPanelMoney} >{selectedCard.rent}</p>
+                            <p className={panelStyles.infoPanelMoney} style={ {paddingTop: "1px"}} >{selectedCard.rent * 2}</p>
+                            <p className={panelStyles.infoPanelMoney} style={ {paddingTop: "2px"}} >{selectedCard.rent * 2}</p>
+                            <p className={panelStyles.infoPanelMoney} style={ {paddingTop: "0px"}} >{selectedCard.rentHouse}</p>
+                            <p className={panelStyles.infoPanelMoney} style={ {paddingTop: "2px"}}>{selectedCard.rent2Houses}</p>
+                            <p className={panelStyles.infoPanelMoney} style={ {paddingTop: "1.5px"}}>{selectedCard.rent3Houses}</p>
+                            <p className={panelStyles.infoPanelMoney} style={ {paddingTop: "1px"}}>{selectedCard.rent4Houses}</p>
                         </ul>
 
                         <ul style = {{paddingRight: "43px"}}>
-                            <p className={gameStyles.infoPanelMoney} style= { { paddingTop: "2px"} }>{selectedCard.pricePerHouse}</p>
-                            <p className={gameStyles.infoPanelMoney} style = { { paddingTop: "3px"} }>{selectedCard.pricePerHouse}</p>
+                            <p className={panelStyles.infoPanelMoney} style= { { paddingTop: "2px"} }>{selectedCard.pricePerHouse}</p>
+                            <p className={panelStyles.infoPanelMoney} style = { { paddingTop: "3px"} }>{selectedCard.pricePerHouse}</p>
                         </ul>
                     </div>
 
                     <Image src="/PropertyBase.png" alt="property card image" width={157} height={244} ></Image>
                 </div>)
                 :
-                (<p className={gameStyles.infoText} style={{color:"gray", fontSize: "20px"}}>No cards have been selected.</p> )
+                (<p className={panelStyles.infoText} style={{color:"gray", fontSize: "20px"}}>No cards have been selected.</p> )
             }
 
             <div className="sliders" style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center" }}>
-                <p className={gameStyles.infoText}>Audio Sliders</p>
+                <p className={panelStyles.infoText}>Audio Sliders</p>
 
                 <div className="vertical-box" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                    <p className={gameStyles.infoText} style={{ fontSize: "15px", textAlign: "center" }}>
+                    <p className={panelStyles.infoText} style={{ fontSize: "15px", textAlign: "center" }}>
                         Music Slider
                     </p>
                     <input
@@ -82,6 +101,8 @@ export default function InfoPanel({ selectedCard }) {
                     />
                 </div>
             </div>
+
+            <p className={panelStyles.infoText}>Inventory</p>
 
 
             <audio ref={audioRef} muted loop>

@@ -1,0 +1,119 @@
+.infoPanel {
+    background-color: #191919;
+    position: absolute;
+    left: 0; /* Pins it to the left edge */
+    top: 0; /* Aligns it to the top */
+    width: 500px;
+    height: 100%;
+    display: flex;
+
+    margin-right: auto; 
+    z-index: 101;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    align-items: center;
+    text-align: center;
+}
+
+.infoText {
+    color: #ffffff;
+    font-size: 50px;
+    font-family: "ITCKabelStd";
+}
+
+.cardContainer {
+    width: 157px; /* Match card width */
+    height: 244px; /* Match card height */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f9fa; /* Light background */
+    border: 3px solid #000; /* Black border */
+    border-radius: 8px; /* Rounded edges */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    overflow: hidden; /* Ensures nothing spills out */
+    transition: transform 1s ease;
+    transform: scale(0);
+    transform-origin: center center;
+}
+
+.cardContainer.visible {
+    transform: scale(1);
+}
+
+.cardHeader {
+    width: 81%;
+    height: 46px; /* Height of the rectangle */
+    background-color: #ff0000;
+    position: absolute; /* ✅ Ensures it sits on top of the image */
+    top: 15px;
+    left: 15px;
+    z-index: 102; /* ✅ Ensures it appears above the image */
+}
+
+.infoPanelTitle {
+    color: black; /* Text color */
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-family: "ITCKabelStd";
+    justify-content: center;
+    text-align: center;
+}
+
+.infoPanelBody {
+    width: 100%;
+    position: absolute; /* ✅ Ensures it sits on top of the image */
+    left: 42px;
+    top: 57px;
+    z-index: 102; /* ✅ Ensures it appears above the image */
+}
+
+.infoPanelMoney {
+    color: black; /* Text color */
+    font-weight: 700;
+    font-size: 6.5px;
+    letter-spacing: 1px;
+    font-family: "ITCKabelStd";
+    justify-content: center;
+    text-align: center;
+}
+
+
+.infoPanelHouses {
+    color: black; /* Text color */
+    font-weight: 700;
+    font-size: 6.5px;
+    letter-spacing: 1px;
+    font-family: "ITCKabelStd";
+    justify-content: center;
+    text-align: center;
+}
+
+@keyframes scaleUp {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.card {
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.card.selected {
+    animation: scaleUp 0.3s forwards;
+}
+
+.sideNav {
+    position: relative;
+    flex-direction: column;
+    margin-right: auto;
+}
