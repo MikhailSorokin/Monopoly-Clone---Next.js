@@ -1,0 +1,204 @@
+
+.parent-container {
+    display: flex;
+    justify-content: flex-end; /* Pushes board to the right */
+    align-items: flex-end; /* Aligns board to the bottom */
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+    background-color: #ddd; /* Just for visualization */
+    flex-grow: 1; /* Ensures section takes up full space */
+}
+
+.board {
+    position: relative; /* Ensures absolute positioning inside */
+    width: 1200px;
+    height: 850px;
+    display: flex; /* Keeps flex properties */
+    margin-left: auto; /* Ensures it's pushed right */
+}
+
+.card {
+    position: absolute; /* Positions inside the board */
+    z-index: 10; /* Above board */
+    background-color: #f4a261;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s;
+    transform: rotate(90deg);
+    transition: box-shadow 0.3s ease-in-out; /* Smooth effect */
+    box-sizing: border-box; /* Ensures border doesn't change size */
+}
+
+.selectedCard {
+    outline: 3px solid rgba(0, 0, 255, 0.8);
+    box-shadow: 0 0 10px rgba(0, 0, 255, 0.8); 
+    background-color: rgba(0, 0, 255, 0.2); 
+}
+
+.rotated {
+    transform: rotate(90deg);
+}
+
+.imageContainer {
+    position: relative; /* Makes text position relative to the image */
+    width: 100%; /* Ensures the container matches the image width */
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+@font-face {
+    font-family: "ITCKabelStd";
+    src: url("/fonts/ITCKabelStdBook.TTF") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.cardTitle {
+    position: absolute;
+    top: 25%; /* Moves text down */
+    left: 50%; /* Moves text right */
+    transform: translate(-50%, 0)  scale(0.6); /* Centers text */
+    color: black; /* Text color */
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transform-origin: center; /* Ensures scaling is centered */
+    font-family: "ITCKabelStd";
+    justify-content: center;
+    text-align: center;
+}
+
+.moneyFooterOneDigit {
+    position: absolute;
+    top: 70%; /* Moves text down */
+    left: 50%; /* Moves text right */
+    transform: translate(-50%, 0)  scale(0.6); /* Centers text */
+    color: black; /* Text color */
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transform-origin: center; /* Ensures scaling is centered */
+    font-family: "ITCKabelStd";
+    justify-content: center;
+    text-align: center;
+}
+
+
+.moneyFooterTwoDigits {
+    position: absolute;
+    top: 70%; /* Moves text down */
+    left: 55%; /* Moves text right */
+    transform: translate(-50%, 0)  scale(0.6); /* Centers text */
+    color: black; /* Text color */
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transform-origin: center; /* Ensures scaling is centered */
+    font-family: "ITCKabelStd";
+    justify-content: center;
+    text-align: center;
+}
+
+.infoPanel {
+    background-color: #191919;
+    position: absolute;
+    left: 0; /* Pins it to the left edge */
+    top: 0; /* Aligns it to the top */
+    width: 500px;
+    height: 100%;
+    display: flex;
+
+    margin-right: auto; 
+    z-index: 101;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    align-items: center;
+    text-align: center;
+}
+
+.infoText {
+    color: #ffffff;
+    font-size: 50px;
+    font-family: "ITCKabelStd";
+}
+
+.cardContainer {
+    width: 157px; /* Match card width */
+    height: 244px; /* Match card height */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f9fa; /* Light background */
+    border: 3px solid #000; /* Black border */
+    border-radius: 8px; /* Rounded edges */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    overflow: hidden; /* Ensures nothing spills out */
+}
+
+.cardHeader {
+    width: 81%;
+    height: 46px; /* Height of the rectangle */
+    background-color: #ff0000;
+    position: absolute; /* ✅ Ensures it sits on top of the image */
+    top: 15px;
+    left: 15px;
+    z-index: 102; /* ✅ Ensures it appears above the image */
+}
+
+.infoPanelTitle {
+    color: black; /* Text color */
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-family: "ITCKabelStd";
+    justify-content: center;
+    text-align: center;
+}
+
+.infoPanelBody {
+    width: 100%;
+    position: absolute; /* ✅ Ensures it sits on top of the image */
+    left: 42px;
+    top: 57px;
+    z-index: 102; /* ✅ Ensures it appears above the image */
+}
+
+.infoPanelMoney {
+    color: black; /* Text color */
+    font-weight: 700;
+    font-size: 6.5px;
+    letter-spacing: 1px;
+    font-family: "ITCKabelStd";
+    justify-content: center;
+    text-align: center;
+}
+
+
+.infoPanelHouses {
+    color: black; /* Text color */
+    font-weight: 700;
+    font-size: 6.5px;
+    letter-spacing: 1px;
+    font-family: "ITCKabelStd";
+    justify-content: center;
+    text-align: center;
+}
+
+.playerOverlay {
+    position: absolute;
+    bottom: -775px;
+    left: 30px;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Prevents interfering with clicks on the board */
+    transition: transform 0.5s ease-in-out; /* Smooth movement */
+    z-index: 200;
+}
