@@ -17,6 +17,25 @@
     text-align: center;
 }
 
+.aiPanel {
+    background-color: #191919;
+    position: absolute;
+    right: 0; /* Pins it to the left edge */
+    top: 0; /* Aligns it to the top */
+    width: 450px;
+    height: 100%;
+    display: flex;
+
+    margin-right: auto; 
+    z-index: 101;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    align-items: center;
+    text-align: center;
+}
+
 .infoText {
     color: #ffffff;
     font-size: 50px;
@@ -24,8 +43,6 @@
 }
 
 .cardContainer {
-    width: 157px; /* Match card width */
-    height: 244px; /* Match card height */
     position: relative;
     display: flex;
     flex-direction: column;
@@ -45,43 +62,31 @@
 }
 
 .cardHeader {
-    width: 81%;
-    height: 46px; /* Height of the rectangle */
+    width: 88%;
+    height: 73px; 
     background-color: #ff0000;
-    position: absolute; /* ✅ Ensures it sits on top of the image */
+    position: absolute;
     top: 15px;
     left: 15px;
-    z-index: 102; /* ✅ Ensures it appears above the image */
+    z-index: 102; 
 }
 
 .infoPanelTitle {
     color: black; /* Text color */
     font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 1px;
+    font-size: 15px;
+    letter-spacing: 1.3px;
     font-family: "ITCKabelStd";
-    justify-content: center;
-    text-align: center;
+    padding-top: 13px;
 }
 
 .infoPanelBody {
     width: 100%;
-    position: absolute; /* ✅ Ensures it sits on top of the image */
-    left: 42px;
-    top: 57px;
-    z-index: 102; /* ✅ Ensures it appears above the image */
+    position: absolute;
+    left: 77px;
+    top: 85px;
+    z-index: 102; 
 }
-
-.infoPanelMoney {
-    color: black; /* Text color */
-    font-weight: 700;
-    font-size: 6.5px;
-    letter-spacing: 1px;
-    font-family: "ITCKabelStd";
-    justify-content: center;
-    text-align: center;
-}
-
 
 .infoPanelHouses {
     color: black; /* Text color */
@@ -134,4 +139,66 @@
     width: 32px;
     height: 32px;
     color: blue;
+}
+
+.infoPanelMoney {
+    color: black; /* Text color */
+    font-weight: 100;
+    font-size: 12.5px;
+    letter-spacing: 1.1px;
+    font-family: "ITCKabelStd";
+    justify-content: center;
+    text-align: center;
+}
+
+.inventoryContainer {
+    position: relative;
+    height: auto; /* Adjust to fit content */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.infoPanelPlayerContainer {
+    width: 200px;
+    height: 45px;
+    background-color: #097edf;
+    border-radius: 40px;
+    outline-color: white;
+    border: 3px solid rgb(255, 255, 255);
+    outline-width: medium;
+    outline-offset: 2px;
+
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center vertically */
+}
+
+
+.infoPanelPlayer {
+    color: white; /* Text color */
+    font-weight: 800;
+    font-size: 30px;
+    letter-spacing: 1px;
+    font-family: "ITCKabelStd";
+}
+
+.moneyContainer {
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    text-align: center;
+}
+
+.moneyListing {
+    padding-top: 50px;
+}
+
+.individualMoney {
+    transform: rotate(90deg);
+    transform-origin: center;
+    position: relative;
 }

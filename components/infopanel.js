@@ -8,7 +8,7 @@ export default function InfoPanel({ selectedCard }) {
     const [volume, setVolume] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
 
-    const [selectedIcon, setSelectedIcon] = useState("game");
+    const [selectedIcon, setSelectedIcon] = useState("inventory");
 
     useEffect(() => {
         const handleUserInteraction = () => {
@@ -35,13 +35,13 @@ export default function InfoPanel({ selectedCard }) {
         <div className={panelStyles.infoPanel}>
             <section className={panelStyles.sideNav} style={ { zIndex: 500 } }>
         
-                <svg className={panelStyles.iconStyle} onClick={() => { setSelectedIcon("game") } } style={ { color : selectedIcon == "game" ? "blue" : "white" } }  class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
-                <path fill-rule="evenodd" d="M8 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4H6Zm7.25-2.095c.478-.86.75-1.85.75-2.905a5.973 5.973 0 0 0-.75-2.906 4 4 0 1 1 0 5.811ZM15.466 20c.34-.588.535-1.271.535-2v-1a5.978 5.978 0 0 0-1.528-4H18a4 4 0 0 1 4 4v1a2 2 0 0 1-2 2h-4.535Z" clip-rule="evenodd"/>
-                </svg>
-
 
                 <svg className={panelStyles.iconStyle} onClick={() => { setSelectedIcon("inventory") } } style={ { color : selectedIcon == "inventory" ? "blue" : "white" } }   class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
                 <path fill-rule="evenodd" d="M4 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4Zm10 5a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm-8-5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm1.942 4a3 3 0 0 0-2.847 2.051l-.044.133-.004.012c-.042.126-.055.167-.042.195.006.013.02.023.038.039.032.025.08.064.146.155A1 1 0 0 0 6 17h6a1 1 0 0 0 .811-.415.713.713 0 0 1 .146-.155c.019-.016.031-.026.038-.04.014-.027 0-.068-.042-.194l-.004-.012-.044-.133A3 3 0 0 0 10.059 14H7.942Z" clip-rule="evenodd"/>
+                </svg>
+
+                <svg className={panelStyles.iconStyle} onClick={() => { setSelectedIcon("game") } } style={ { color : selectedIcon == "game" ? "blue" : "white" } }  class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" d="M8 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4H6Zm7.25-2.095c.478-.86.75-1.85.75-2.905a5.973 5.973 0 0 0-.75-2.906 4 4 0 1 1 0 5.811ZM15.466 20c.34-.588.535-1.271.535-2v-1a5.978 5.978 0 0 0-1.528-4H18a4 4 0 0 1 4 4v1a2 2 0 0 1-2 2h-4.535Z" clip-rule="evenodd"/>
                 </svg>
 
 
@@ -52,7 +52,7 @@ export default function InfoPanel({ selectedCard }) {
             </section>
 
             {selectedIcon == "game" ? (
-                <>
+                <div>
                     <p className={panelStyles.infoText}>Information</p>
 
                     {selectedCard ? (
@@ -64,33 +64,46 @@ export default function InfoPanel({ selectedCard }) {
                             <div className={panelStyles.infoPanelBody}>
                                 <ul>
                                     <li className={panelStyles.infoPanelMoney}>{selectedCard.rent}</li>
-                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "1px" }}>{selectedCard.rent * 2}</li>
-                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "2px" }}>{selectedCard.rent * 2}</li>
-                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "0px" }}>{selectedCard.rentHouse}</li>
-                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "2px" }}>{selectedCard.rent2Houses}</li>
-                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "1.5px" }}>{selectedCard.rent3Houses}</li>
-                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "1px" }}>{selectedCard.rent4Houses}</li>
+                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "9px" }}>{selectedCard.rent * 2}</li>
+                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "11px" }}>{selectedCard.rent * 2}</li>
+                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "9px" }}>{selectedCard.rentHouse}</li>
+                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "9px" }}>{selectedCard.rent2Houses}</li>
+                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "9px" }}>{selectedCard.rent3Houses}</li>
+                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "9px" }}>{selectedCard.rent4Houses}</li>
                                 </ul>
 
-                                <ul style={{ paddingRight: "43px" }}>
-                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "2px" }}>{selectedCard.pricePerHouse}</li>
+                                <ul style={{ paddingRight: "49px" }}>
                                     <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "3px" }}>{selectedCard.pricePerHouse}</li>
+                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "8px" }}>{selectedCard.pricePerHouse}</li>
                                 </ul>
                             </div>
 
-                            <Image src="/PropertyBase.png" alt="property card image" width={157} height={244} />
+                            <Image src="/PropertyBase.jpg" alt="property card image" width={243} height={378} />
                         </div>
                     ) : (
                         <p className={panelStyles.infoText} style={{ color: "gray", fontSize: "20px" }}>No cards have been selected.</p>
                     )}
-                </>
+                </div>
             ) : null}
 
             
             {selectedIcon == "inventory" ? (
-                <>
+                <div>
                     <p className={panelStyles.infoText}>Inventory</p>
-                </>
+
+                    <div className={panelStyles.inventoryContainer}>
+                        <Image src="/playerCar.png" width={64} height={64}></Image>
+                        <div className={panelStyles.infoPanelPlayerContainer}>
+                            <p className={panelStyles.infoPanelPlayer}>Player</p>
+                        </div>
+
+                        <div className={panelStyles.moneyContainer}>
+                            <Image src="/Yuge.png" width={38} height={27}></Image>
+                            <p className={panelStyles.infoPanelPlayer}>1500</p>
+                        </div>
+
+                    </div>
+                </div>
             ) : null}
 
 

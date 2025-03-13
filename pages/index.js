@@ -5,6 +5,7 @@ import gameStyles from "../styles/game.module.css";
 
 import { useEffect, useState } from "react";
 import InfoPanel from "../components/infopanel.js";
+import AIPanel from "../components/aipanel.js";
 
 export default function RootLayout({ }) {
 
@@ -18,6 +19,10 @@ export default function RootLayout({ }) {
                 </section>
                 <section>
                     <Board selectedCard={selectedCard} onCardClick={setSelectedCard} />
+                </section>
+
+                <section>
+                    <AIPanel />
                 </section>
             </div>
 

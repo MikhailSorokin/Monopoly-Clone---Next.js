@@ -142,8 +142,9 @@ export default function Board( { selectedCard, onCardClick }) {
             <div className={boardStyle.board}>
                 <Image className={boardStyle.rotated} alt = "board" priority src="/Board.jpg" width={850} height={850}></Image>
 
-                <div className={boardStyle.playerOverlay}>
-                    <Player x={x} y={y}/>
+                <div className={boardStyle.playerContainer}>
+                    <Player className={boardStyle.playerOverlay} src={"/playerCar.png"} x={x} y={y + 60}/>
+                    <Player className={boardStyle.playerOverlay} src={"/playerAI.png"} x={0}y={0}/>
                 </div>
             </div>
 
