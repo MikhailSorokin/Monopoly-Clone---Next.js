@@ -1,6 +1,9 @@
 # Monopoly-Clone---Next.js
 A monopoly clone made in Next.js and Golang - open source, free project just meant for learning.
 
+Tech stack: Next.js, Golang.
+External software: Figma, flowbite for icons
+
 Attribution will happen soon when relevant materials are uploaded.
 
 Day 1
