@@ -129,3 +129,16 @@
 .playerOverlay:nth-child(n) {
     bottom: calc(n * 51px); /* Increase spacing between overlays */
 }
+
+.dice {
+    position: absolute;
+    z-index: 50;
+    bottom: 15%;
+    left: 350px;
+    width: auto;
+    flex-grow: inherit;
+}
+
+.die {
+    padding-left: 10px;
+}

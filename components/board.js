@@ -4,7 +4,14 @@ import Card from "./card.js"
 import Player from "./player.js";
 import React, {useState, useEffect, useRef} from "react";
 
-export default function Board( { selectedCard, onCardClick }) {
+export default function Board( { selectedCard, onCardClick, dieRolled }) {
+
+    const [firstDiceRoll, setDiceRollOne] = useState(0);
+    const [secondDiceRoll, setDiceRollTwo] = useState(0);
+
+    function generateRandomDiceRoll() {
+        return Math.floor(Math.random() * 6) + 1;
+    }
 
     const cards = ([
         {name: "MEDITERRANEAN AVENUE", price: 60, x: 24, y: 94, source: "/BrownCard.png", hexColor: "#955235", angle: 90,
@@ -90,38 +97,67 @@ export default function Board( { selectedCard, onCardClick }) {
 
     const animationFrameRef = useRef(null);
     const lastTimeRef = useRef(performance.now());
+
     useEffect(() => {
-        const animate = (currentTime) => {
-            const deltaTime = currentTime - lastTimeRef.current;
-            lastTimeRef.current = currentTime;
+        if (firstDiceRoll > 0 && secondDiceRoll > 0) {
 
-            //console.log(`x: ${x}, y: ${y}`);
-            const speed = 0.2;
+            cancelAnimationFrame(animationFrameRef.current);
 
-            if (y >= -760 && signY === -1) {
-                setY(prevY => prevY + signY * deltaTime * speed);
-            } else if (x < 740 && signX === 1) {
-                setSignY(1)
-                setX(prevX => prevX + signX * deltaTime * speed);
-            } else if (y <= 0 && signY === 1) {
-                setSignX(-1)
-                setY(prevY => prevY + signY * deltaTime * speed);
-            } else if (x >= 0 && signX === -1) {
-                setX(prevX => prevX + signX * deltaTime * speed);
-            } else if (x <= 0 && y >= 0 && signX === -1 && signY === 1) {
-                setSignY(-1)
-                setSignX(1)
-                setY(0)
-                setX(0)
-            }
+            lastTimeRef.current = performance.now();    
+
+            const animate = (currentTime) => {
+                const deltaTime = currentTime - lastTimeRef.current;
+                lastTimeRef.current = currentTime;
+
+                const sumRolls = firstDiceRoll + secondDiceRoll;
+
+                const speed = 0.15;
+
+                let increase = -68 * sumRolls - 35;
+
+                if (y >= increase && signY === -1) {
+                    setY(prevY => prevY + signY * deltaTime * speed);
+                } else if (y <= 0 && signY === 1) {
+                    setDiceRollOne(0);
+                    setDiceRollTwo(0);
+                    setSignX(-1)
+                    setY(prevY => prevY + signY * deltaTime * speed);
+                } else if (x >= 0 && signX === -1) {
+                    setX(prevX => prevX + signX * deltaTime * speed);
+                } else if (x < 740 && signX === 1) {
+                    setSignY(1)
+                    setX(prevX => prevX + signX * deltaTime * speed);
+                } else if (x <= 0 && y >= 0 && signX === -1 && signY === 1) {
+                    setSignY(-1)
+                    setSignX(1)
+                    setY(0)
+                    setX(0)
+                }
+
+                animationFrameRef.current = requestAnimationFrame(animate);
+            };
 
             animationFrameRef.current = requestAnimationFrame(animate);
-        };
+            return () => cancelAnimationFrame(animationFrameRef.current); 
+        }
+    }, [x, y, firstDiceRoll, secondDiceRoll]);
 
-        animationFrameRef.current = requestAnimationFrame(animate);
+    useEffect(() => {
+        if (dieRolled) {
+            console.log("Changed");        
+            setDiceRollOne(generateRandomDiceRoll());
+            setDiceRollTwo(generateRandomDiceRoll());
+        }
+    }, [dieRolled]);
 
-        return () => cancelAnimationFrame(animationFrameRef.current); // Cleanup
-    }, [x, y]);
+    /*useEffect(() => {
+        const interval = setInterval(() => {
+            setDiceRollOne(generateRandomDiceRoll());
+            setDiceRollTwo(generateRandomDiceRoll());
+        }, 1000);  // Change every second
+
+        return () => clearInterval(interval);  // Cleanup on unmount
+    }, []);*/
 
     return (
         <div className={boardStyle.board}>
@@ -143,9 +179,17 @@ export default function Board( { selectedCard, onCardClick }) {
                 <Image className={boardStyle.rotated} alt = "board" priority src="/Board.jpg" width={850} height={850}></Image>
 
                 <div className={boardStyle.playerContainer}>
-                    <Player className={boardStyle.playerOverlay} src={"/playerCar.png"} x={x} y={y + 60}/>
-                    <Player className={boardStyle.playerOverlay} src={"/playerAI.png"} x={0}y={0}/>
+                    <Player className={boardStyle.playerOverlay} src={"/playerCar.png"} x={x} y={y + 35}/>
+                    <Player className={boardStyle.playerOverlay} src={"/playerAI.png"} x={0}y={-20}/>
                 </div>
+
+                { firstDiceRoll > 0 && secondDiceRoll > 0 && dieRolled ? 
+                    <div className={boardStyle.dice}>
+                        <Image className={boardStyle.die} src={`/Die_${firstDiceRoll}.jpg`} width={64} height={64} />
+                        <Image className={boardStyle.die} src={`/Die_${secondDiceRoll}.jpg`} width={64} height={64}/>
+                    </div> : 
+                    <></>
+                }
             </div>
 
         </div>

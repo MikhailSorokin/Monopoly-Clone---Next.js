@@ -10,15 +10,16 @@ import AIPanel from "../components/aipanel.js";
 export default function RootLayout({ }) {
 
     const [selectedCard, setSelectedCard] = useState(null);
+    const [rollDie, setRollDie] = useState(false);
 
     return (
         <Game>
             <div className={gameStyles.container}>
                 <section>
-                    <InfoPanel selectedCard={selectedCard} />
+                    <InfoPanel selectedCard={selectedCard} onDieClick={setRollDie} />
                 </section>
                 <section>
-                    <Board selectedCard={selectedCard} onCardClick={setSelectedCard} />
+                    <Board selectedCard={selectedCard} onCardClick={setSelectedCard} dieRolled={rollDie} />
                 </section>
 
                 <section>

@@ -2,7 +2,7 @@ import panelStyles from "../styles/panel.module.css"
 import Image from "next/image"
 import React, {useEffect, useState, useRef} from "react";
 
-export default function InfoPanel({ selectedCard }) {
+export default function InfoPanel({ selectedCard , onDieClick }) {
 
     const audioRef = useRef(null);
     const [volume, setVolume] = useState(0);
@@ -100,6 +100,10 @@ export default function InfoPanel({ selectedCard }) {
                         <div className={panelStyles.moneyContainer}>
                             <Image src="/Yuge.png" width={38} height={27}></Image>
                             <p className={panelStyles.infoPanelPlayer}>1500</p>
+                        </div>
+
+                        <div>
+                        <Image onClick = {() => onDieClick(true) } className={panelStyles.dieStyle} src="/Die_1.jpg" width={27} height={27}></Image>
                         </div>
 
                     </div>

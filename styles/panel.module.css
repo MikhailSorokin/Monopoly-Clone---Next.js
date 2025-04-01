@@ -139,6 +139,7 @@
     width: 32px;
     height: 32px;
     color: blue;
+    transform: scale(1.1);
 }
 
 .infoPanelMoney {
