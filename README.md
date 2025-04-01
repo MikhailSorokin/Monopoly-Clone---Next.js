@@ -12,6 +12,10 @@ Day 1
 Day 3
 ![image](https://github.com/user-attachments/assets/ab24454c-a0ee-4d15-8f1c-c17420e2137d)
 
+Day 5 - (03/24/25)
+
+TODO: Dice roll update after a week break
+
 Attribution:
 
 [Figma monopoloy kit by Cammy Hong](https://www.figma.com/community/file/1369415023799516229/monopoly-kit)
