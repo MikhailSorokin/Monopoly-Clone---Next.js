@@ -56,30 +56,48 @@ export default function InfoPanel({ selectedCard , onDieClick }) {
                     <p className={panelStyles.infoText}>Information</p>
 
                     {selectedCard ? (
+                        selectedCard.type == "railroad" ? ( 
                         <div className={`${panelStyles.cardContainer} ${isVisible ? panelStyles.visible : ''}`}>
-                            <div className={panelStyles.cardHeader} style={{ backgroundColor: selectedCard.hexColor }}>
-                                <p className={panelStyles.infoPanelTitle}>{selectedCard.name}</p>
-                            </div>
-
-                            <div className={panelStyles.infoPanelBody}>
-                                <ul>
-                                    <li className={panelStyles.infoPanelMoney}>{selectedCard.rent}</li>
-                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "9px" }}>{selectedCard.rent * 2}</li>
-                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "11px" }}>{selectedCard.rent * 2}</li>
-                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "9px" }}>{selectedCard.rentHouse}</li>
-                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "9px" }}>{selectedCard.rent2Houses}</li>
-                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "9px" }}>{selectedCard.rent3Houses}</li>
-                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "9px" }}>{selectedCard.rent4Houses}</li>
-                                </ul>
-
-                                <ul style={{ paddingRight: "49px" }}>
-                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "3px" }}>{selectedCard.pricePerHouse}</li>
-                                    <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "8px" }}>{selectedCard.pricePerHouse}</li>
-                                </ul>
-                            </div>
-
-                            <Image src="/PropertyBase.jpg" alt="property card image" width={243} height={378} />
+                            <Image src="/TrainInfo.jpg" alt="property card image" width={243} height={378} />
                         </div>
+                        ) :
+                        selectedCard.type == "income" ? (
+                            <div className={`${panelStyles.cardContainer} ${isVisible ? panelStyles.visible : ''}`}>
+                            <Image src="/Income.jpg" alt="property card image" width={243} height={378} />
+                            </div>
+                        ) :
+                        selectedCard.type == "utility" ? (
+                            <div className={`${panelStyles.cardContainer} ${isVisible ? panelStyles.visible : ''}`}>
+                            <Image src="/UtilityBase.jpg" alt="property card image" width={243} height={378} />
+                            </div>
+                        )
+                        :
+                        (
+                            <div className={`${panelStyles.cardContainer} ${isVisible ? panelStyles.visible : ''}`}>
+                                <div className={panelStyles.cardHeader} style={{ backgroundColor: selectedCard.hexColor }}>
+                                    <p className={panelStyles.infoPanelTitle}>{selectedCard.name}</p>
+                                </div>
+
+                                <div className={panelStyles.infoPanelBody}>
+                                    <ul>
+                                        <li className={panelStyles.infoPanelMoney}>{selectedCard.rent}</li>
+                                        <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "9px" }}>{selectedCard.rent * 2}</li>
+                                        <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "11px" }}>{selectedCard.rent * 2}</li>
+                                        <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "9px" }}>{selectedCard.rentHouse}</li>
+                                        <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "9px" }}>{selectedCard.rent2Houses}</li>
+                                        <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "9px" }}>{selectedCard.rent3Houses}</li>
+                                        <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "9px" }}>{selectedCard.rent4Houses}</li>
+                                    </ul>
+
+                                    <ul style={{ paddingRight: "49px" }}>
+                                        <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "3px" }}>{selectedCard.pricePerHouse}</li>
+                                        <li className={panelStyles.infoPanelMoney} style={{ paddingTop: "8px" }}>{selectedCard.pricePerHouse}</li>
+                                    </ul>
+                                </div>
+
+                                <Image src="/PropertyBase.jpg" alt="property card image" width={243} height={378} />
+                            </div>
+                        )
                     ) : (
                         <p className={panelStyles.infoText} style={{ color: "gray", fontSize: "20px" }}>No cards have been selected.</p>
                     )}

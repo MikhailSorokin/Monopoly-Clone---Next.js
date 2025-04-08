@@ -142,3 +142,39 @@
 .die {
     padding-left: 10px;
 }
+
+
+/* Special card title and footer */
+.specialCardTitle {
+    position: absolute;
+    top: -7.5%;
+    left: 50%; /* Moves text right */
+    transform: translate(-50%, 0)  scale(0.6); /* Centers text */
+    color: black; /* Text color */
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transform-origin: center; /* Ensures scaling is centered */
+    font-family: "ITCKabelStd";
+    justify-content: center;
+    text-align: center;
+}
+
+.specialItemTwoDigits {
+    position: absolute;
+    top: 69%; /* Moves text down */
+    left: 57.5%; /* Moves text right */
+    transform: translate(-50%, 0)  scale(0.6); /* Centers text */
+    color: black; /* Text color */
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transform-origin: center; /* Ensures scaling is centered */
+    font-family: "ITCKabelStd";
+    justify-content: center;
+    text-align: center;
+}
+
+.railroadCard {
+    
+}
