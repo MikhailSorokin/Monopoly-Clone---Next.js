@@ -4,7 +4,7 @@ import Card from "./card.js"
 import Player from "./player.js";
 import React, {useState, useEffect, useRef} from "react";
 
-export default function Board( { selectedCard, onCardClick, dieRolled }) {
+export default function Board( { selectedCard, onCardClick, dieRolled, onDieRolled, setSpotCard}) {
 
     const [firstDiceRoll, setDiceRollOne] = useState(0);
     const [secondDiceRoll, setDiceRollTwo] = useState(0);
@@ -153,15 +153,29 @@ export default function Board( { selectedCard, onCardClick, dieRolled }) {
         {name: "BOARDWALK", price: 400, x: 115, y: 4, source: "/BlueCard.png", hexColor: "#0072BB", angle: 0,
             pricePerHouse: 200, rent: 50, rentHouse: 200, rent2Houses: 600, rent3Houses: 1400, rent4Houses: 1700, rentHotel: 2000
         },
-    ])    
+    ]);
 
     const [x, setX] = useState(0);
     const [y, setY] = useState(0);
-    const [signX, setSignX] = useState(1)
-    const [signY, setSignY] = useState(-1)
+    const [signX, setSignX] = useState(1);
+    const [signY, setSignY] = useState(-1);
+    // Four quadrants that are dicatated by the maximum vertical roll of spaces 
+    // and maximum horizontal roll of spaces
+    const [quadrant, setQuadrant] = useState(1);
+
+    const [aiX, setAiX] = useState(0);
+    const [aiY, setAiY] = useState(0);
+    const [aiSignX, setAiSignX] = useState(1);
+    const [aiSignY, setAiSignY] = useState(-1);
 
     const animationFrameRef = useRef(null);
     const lastTimeRef = useRef(performance.now());
+
+    const verticalDiceRollsMax = 10;
+    const horizontalDiceRollsMax = 10;
+
+    const [totalVertReached, setTotalVertReached] = useState(0);
+    const [totalHozReached, setTotalHozReached] = useState(0);
 
     useEffect(() => {
         if (firstDiceRoll > 0 && secondDiceRoll > 0) {
@@ -174,29 +188,65 @@ export default function Board( { selectedCard, onCardClick, dieRolled }) {
                 const deltaTime = currentTime - lastTimeRef.current;
                 lastTimeRef.current = currentTime;
 
-                const sumRolls = firstDiceRoll + secondDiceRoll;
+                let sumRolls = firstDiceRoll + secondDiceRoll;
 
                 const speed = 0.15;
 
-                let increase = -68 * sumRolls - 35;
+                let increaseY = 0;
+                let increaseX = 0;
 
-                if (y >= increase && signY === -1) {
+                if (totalVertReached < verticalDiceRollsMax) {
+                    sumRolls += totalVertReached; 
+                    increaseY = -68 * Math.min(sumRolls, verticalDiceRollsMax) - 35;
+                    increaseX = 80 * (sumRolls - verticalDiceRollsMax);
+                } else {
+                    sumRolls += totalHozReached;
+                    if (totalHozReached == 0) {
+                        increaseX = 80 * (sumRolls - verticalDiceRollsMax);
+                    } else {
+                        increaseX = 80 * sumRolls;
+                    }
+                }
+    
+                if (y >= increaseY && signY === -1) {
+                    setQuadrant(1);
                     setY(prevY => prevY + signY * deltaTime * speed);
                 } else if (y <= 0 && signY === 1) {
-                    setDiceRollOne(0);
-                    setDiceRollTwo(0);
+                    setQuadrant(3);
                     setSignX(-1)
                     setY(prevY => prevY + signY * deltaTime * speed);
-                } else if (x >= 0 && signX === -1) {
+                } else if (x > 0 && signX === -1) {
+                    setQuadrant(4);
                     setX(prevX => prevX + signX * deltaTime * speed);
-                } else if (x < 740 && signX === 1) {
-                    setSignY(1)
+                } else if (x < increaseX && signX === 1) {
+                    setQuadrant(2);
                     setX(prevX => prevX + signX * deltaTime * speed);
                 } else if (x <= 0 && y >= 0 && signX === -1 && signY === 1) {
+                    console.log("I am in increase both X, Y.");
                     setSignY(-1)
                     setSignX(1)
                     setY(0)
                     setX(0)
+                } else {
+                    console.log("Die roll ended");
+                    onDieRolled(false);
+                    setDiceRollOne(0);
+                    setDiceRollTwo(0);
+                    setTotalVertReached(Math.min(sumRolls, verticalDiceRollsMax));
+                    setTotalHozReached(Math.max(0, (sumRolls - verticalDiceRollsMax)));
+                    setSpotCard(cards[sumRolls - 1]);
+
+                    // Let AI go
+
+                    // TODO - Factor in if we have finished a quadrant and we are at the maximum roll 
+                    /*if (quadrant == 2) {
+                        setTotalVertReached(0);
+                    } else if (quadrant == 3) {
+                        setTotalHozReached(0);
+                    } else if (quadrant == 4) {
+                        setTotalHozReached(0);
+                        setTotalVertReached(0);
+                    }*/
                 }
 
                 animationFrameRef.current = requestAnimationFrame(animate);
@@ -208,21 +258,91 @@ export default function Board( { selectedCard, onCardClick, dieRolled }) {
     }, [x, y, firstDiceRoll, secondDiceRoll]);
 
     useEffect(() => {
+        if (firstDiceRoll > 0 && secondDiceRoll > 0) {
+
+            cancelAnimationFrame(animationFrameRef.current);
+
+            lastTimeRef.current = performance.now();    
+
+            const animate = (currentTime) => {
+                const deltaTime = currentTime - lastTimeRef.current;
+                lastTimeRef.current = currentTime;
+
+                let sumRolls = firstDiceRoll + secondDiceRoll;
+
+                const speed = 0.15;
+
+                let increaseY = 0;
+                let increaseX = 0;
+
+                if (totalVertReached < verticalDiceRollsMax) {
+                    sumRolls += totalVertReached; 
+                    increaseY = -68 * Math.min(sumRolls, verticalDiceRollsMax) - 35;
+                    increaseX = 80 * (sumRolls - verticalDiceRollsMax);
+                } else {
+                    sumRolls += totalHozReached;
+                    if (totalHozReached == 0) {
+                        increaseX = 80 * (sumRolls - verticalDiceRollsMax);
+                    } else {
+                        increaseX = 80 * sumRolls;
+                    }
+                }
+    
+                if (y >= increaseY && signY === -1) {
+                    setQuadrant(1);
+                    setY(prevY => prevY + signY * deltaTime * speed);
+                } else if (y <= 0 && signY === 1) {
+                    setQuadrant(3);
+                    setSignX(-1)
+                    setY(prevY => prevY + signY * deltaTime * speed);
+                } else if (x > 0 && signX === -1) {
+                    setQuadrant(4);
+                    setX(prevX => prevX + signX * deltaTime * speed);
+                } else if (x < increaseX && signX === 1) {
+                    setQuadrant(2);
+                    setX(prevX => prevX + signX * deltaTime * speed);
+                } else if (x <= 0 && y >= 0 && signX === -1 && signY === 1) {
+                    console.log("I am in increase both X, Y.");
+                    setSignY(-1)
+                    setSignX(1)
+                    setY(0)
+                    setX(0)
+                } else {
+                    console.log("Die roll ended");
+                    onDieRolled(false);
+                    setDiceRollOne(0);
+                    setDiceRollTwo(0);
+                    setTotalVertReached(Math.min(sumRolls, verticalDiceRollsMax));
+                    setTotalHozReached(Math.max(0, (sumRolls - verticalDiceRollsMax)));
+                    setSpotCost(cards[sumRolls - 1].price);
+
+                    // Let AI go
+
+                    // TODO - Factor in if we have finished a quadrant and we are at the maximum roll 
+                    /*if (quadrant == 2) {
+                        setTotalVertReached(0);
+                    } else if (quadrant == 3) {
+                        setTotalHozReached(0);
+                    } else if (quadrant == 4) {
+                        setTotalHozReached(0);
+                        setTotalVertReached(0);
+                    }*/
+                }
+
+                animationFrameRef.current = requestAnimationFrame(animate);
+            };
+
+            animationFrameRef.current = requestAnimationFrame(animate);
+            return () => cancelAnimationFrame(animationFrameRef.current); 
+        }
+    }, [aiX, aiY, firstDiceRoll, secondDiceRoll]);
+
+    useEffect(() => {
         if (dieRolled) {
-            console.log("Changed");        
             setDiceRollOne(generateRandomDiceRoll());
             setDiceRollTwo(generateRandomDiceRoll());
         }
     }, [dieRolled]);
-
-    /*useEffect(() => {
-        const interval = setInterval(() => {
-            setDiceRollOne(generateRandomDiceRoll());
-            setDiceRollTwo(generateRandomDiceRoll());
-        }, 1000);  // Change every second
-
-        return () => clearInterval(interval);  // Cleanup on unmount
-    }, []);*/
 
     return (
         <div className={boardStyle.board}>

@@ -203,3 +203,55 @@
     transform-origin: center;
     position: relative;
 }
+
+.dieStyle {
+    color: #097edf;
+}
+
+.dieStyle:hover {
+    transform: scale(1.1);
+}
+
+.smallCardGrid {
+    padding-left: 10px;
+    padding-top: 10px;
+    display: flex;                       /* establish flex container */
+    flex-wrap: wrap;                     /* enable flex items to wrap */
+    justify-content: space-around;
+    gap: 10px;
+
+    position: relative; /* Makes text position relative to the image */
+    
+    display: flex;
+    align-items: center;
+}
+
+.smallCardFooter {
+    position: absolute;
+    top: 73%; /* Moves text down */
+    left: 60%; /* Moves text right */
+    transform: translate(-50%, 0)  scale(0.6); /* Centers text */
+    color: black; /* Text color */
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transform-origin: center; /* Ensures scaling is centered */
+    font-family: "ITCKabelStd";
+    justify-content: center;
+    text-align: center;
+}
+
+.smallCardTitle {
+    position: absolute;
+    top: 25%; /* Moves text down */
+    left: 55%; /* Moves text right */
+    transform: translate(-50%, 0)  scale(0.7); /* Centers text */
+    color: black; /* Text color */
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transform-origin: center; /* Ensures scaling is centered */
+    font-family: "ITCKabelStd";
+    justify-content: center;
+    text-align: center;
+}
