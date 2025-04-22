@@ -17,6 +17,9 @@ Day 4/5 - (04/16/25)
 Dice roll trigger:
 ![image](https://github.com/user-attachments/assets/dfe74e60-c36e-42ab-963a-87e914060f43)
 
+Roll with sound:
+![image](https://github.com/user-attachments/assets/0822317f-0750-4f1f-8edf-f73654562b48)
+
 Dice roll complete, auto remove money. Acquire in inventory. Play until you lose:
 ![image](https://github.com/user-attachments/assets/30f54a39-04e3-45f9-8786-4a7c1c1360f3)
 
