@@ -3,7 +3,7 @@
     position: absolute;
     left: 0; /* Pins it to the left edge */
     top: 0; /* Aligns it to the top */
-    width: 500px;
+    width: 450px;
     height: 100%;
     display: flex;
 
@@ -22,7 +22,7 @@
     position: absolute;
     right: 0; /* Pins it to the left edge */
     top: 0; /* Aligns it to the top */
-    width: 450px;
+    width: 250px;
     height: 100%;
     display: flex;
 

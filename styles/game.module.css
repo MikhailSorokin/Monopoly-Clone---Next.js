@@ -11,7 +11,7 @@
 
 .board {
     position: relative; /* Ensures absolute positioning inside */
-    width: 1350px;
+    width: 1150px;
     height: 850px;
     display: flex; /* Keeps flex properties */
     margin-left: auto; /* Ensures it's pushed right */
